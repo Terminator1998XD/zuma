@@ -64,4 +64,8 @@ function setlang(l){
   window.lang = l;
   translateBlocks();
   localStorage['savelang'] = l;
+  $('#levelup').hide();
+  $('#air').hide();
+  $('.upgrade').remove();
+  $('#minigame').prepend(getMinigame());
 }
