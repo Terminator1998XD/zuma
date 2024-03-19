@@ -28,9 +28,6 @@ function sdk(callback){
         api.userInfo();
 
         const queryString = window.location.search.slice(1);
-        if (!queryString) {
-            return {};
-        }
 
         const paramsArray = queryString.split('&');
         window.paramsObject = {};
@@ -72,7 +69,7 @@ function sdk(callback){
   var t = document.getElementsByTagName('script')[0];
   var s = document.createElement('script');
   s.src = apiurl;
-  s.async = platform == platforms.yandex;
+  s.async = true;
   t.parentNode.insertBefore(s, t);
   s.onload = initFunc;
 }
