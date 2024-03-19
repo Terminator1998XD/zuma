@@ -21,6 +21,22 @@ html, body {
                                   supported by Chrome, Edge, Opera and Firefox */
 }
 
+#langselector{
+  position: absolute;
+  right: 1vw;
+  top:1vh;
+  color: white;
+  font-size: 2vh;
+}
+
+#langselector p{
+  cursor: pointer;
+}
+
+#langselector p:hover{
+  text-decoration: underline;
+}
+
 .upgrade{
   display: block;
   width: 100%;
