@@ -10,6 +10,7 @@ function sdk(callback){
         window.isMobile = !ysdk.deviceInfo.isDesktop() && ysdk.deviceInfo._type != null;
 				window.isPC = ysdk.deviceInfo.isDesktop() || ysdk.deviceInfo._type == null;
 				window.lang = ysdk.environment.i18n.lang;
+        $('#langselector').remove();
 
         ysdk.getLeaderboards().then(lb => {
 					window.lb = lb;
@@ -38,6 +39,8 @@ function sdk(callback){
       		else window.lang = paramsObject.lang == 'ru_ru' ? 'ru' : 'en';
         }
         else window.lang = 'en';
+
+        $('#langselector').show();
 
         window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         window.isPC = !window.isMobile;
