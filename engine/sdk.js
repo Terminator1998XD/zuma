@@ -72,7 +72,7 @@ function sdk(callback){
   var t = document.getElementsByTagName('script')[0];
   var s = document.createElement('script');
   s.src = apiurl;
-  s.async = true;
+  s.async = platform == platforms.yandex;
   t.parentNode.insertBefore(s, t);
   s.onload = initFunc;
 }
