@@ -3,10 +3,10 @@ function fillSettings(){
   const sound = new Checkbox(TXT('snd'),'UserSoundEnable', true);
 
   $('.settings').each(function() {
-    $(this).append([isMobile ? null : mus.getNode(),sound.getNode()]);
+    $(this).append([(isMobile&&platform == platforms.yandex) ? null : mus.getNode(),sound.getNode()]);
   });
 
-  if(!isMobile)mus.loadFromLocalStorage();
+  if(!(isMobile&&platform == platforms.yandex))mus.loadFromLocalStorage();
   sound.loadFromLocalStorage();
 }
 

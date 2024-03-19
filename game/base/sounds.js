@@ -14,14 +14,14 @@ function StopAllSound() {
 }
 
 function playMusic() {
-  if (isMobile || !UserMusEnable || !SoundsEnable) return;
+  if ((isMobile&&platform == platforms.yandex) || !UserMusEnable || !SoundsEnable) return;
 	if(audios['background'] == null) audios.background = new Audio("sounds/background.mp3");
   audios.background.volume = MusVolume;
   audios.background.play();
 }
 
 function loadBackgroundTrackPosition(){
-	if(isMobile) return;
+	if(isMobile&&platform == platforms.yandex) return;
 	let savedPosition = localStorage.getItem('backgroundTrackPosition');
 	if (savedPosition) {
 		let currentPosition = parseFloat(savedPosition);
@@ -34,7 +34,7 @@ function loadBackgroundTrackPosition(){
 }
 
 function saveBackgroundTrackPosition(){
-	if(isMobile) return;
+	if(isMobile&&platform == platforms.yandex) return;
 	// Проверяем, загружен ли фоновый трек
 	if(audios['background'] != null){
 		// Сохраняем текущую позицию трека в localStorage
@@ -43,7 +43,7 @@ function saveBackgroundTrackPosition(){
 }
 
 function pauseMusic() {
-	if(isMobile) return;
+	if(isMobile&&platform == platforms.yandex) return;
   if(audios['background'] != null) audios.background.pause();
 }
 
@@ -62,5 +62,4 @@ function PlaySound(name, vol = 1) {
 var SoundsEnable = true;
 var UserMusEnable = true;
 var UserSoundEnable = true;
-var ZombieSoundEnable = true;
 const MusVolume = 0.6;
