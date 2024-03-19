@@ -28,22 +28,24 @@ function sdk(callback){
         api.userInfo();
 
         const queryString = window.location.search.slice(1);
+        if (queryString) {
+          const paramsArray = queryString.split('&');
+          window.paramsObject = {};
 
-        const paramsArray = queryString.split('&');
-        window.paramsObject = {};
+          paramsArray.forEach(param => {
+              const [key, value] = param.split('=');
+              paramsObject[key.toLowerCase()] = value.toLowerCase();
+          });
 
-        paramsArray.forEach(param => {
-            const [key, value] = param.split('=');
-            paramsObject[key.toLowerCase()] = value.toLowerCase();
-        });
+          if(localStorage['savelang'] != null) {
+      			window.lang = localStorage['savelang'];
+      		}
+      		else window.lang = paramsObject.lang == 'ru_ru' ? 'ru' : 'en';
+        }
+        else window.lang = 'en';
 
         window.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         window.isPC = !window.isMobile;
-
-    		if(localStorage['savelang'] != null) {
-    			window.lang = localStorage['savelang'];
-    		}
-    		else window.lang = paramsObject.lang == 'ru_ru' ? 'ru' : 'en';
 
         window.lb = null;
 
