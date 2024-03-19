@@ -20,13 +20,8 @@ function sdk(callback){
   } else if(platform == platforms.vkplay) {
     var apiurl = 'https://vkplay.ru/app/'+gameid+'/static/mailru.core.js';
     var initFunc = function(){
-      iframeApi({appid: gameid, adsCallback: adsCallback,
-        userInfoCallback: function(userinf) {
-          console.log(userinf);
-        }
+      iframeApi({appid: gameid, adsCallback: adsCallback
       }).then(function(api){
-        api.userInfo();
-
         const queryString = window.location.search.slice(1);
         if (queryString) {
           const paramsArray = queryString.split('&');
