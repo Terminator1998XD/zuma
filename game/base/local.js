@@ -34,11 +34,34 @@ function hideTexts(){
 }
 
 function translateBlocks(){
-    $('[translate]').each(function() {
-    if(lang != 'ru'){
-      var value = $(this).attr('translate');
-      $(this).html(value);
+  if(platform == platforms.yandex){
+     $('[translate]').each(function() {
+      if(lang != 'ru'){
+        var value = $(this).attr('translate');
+        $(this).html(value);
+      }
+      $(this).show();
+    });
+  } else {
+    if(translateBlocks.flag){
+      $('[translate]').each(function() {
+        $(this).attr('translate_ru',$(this).html());
+      });
+      translateBlocks.flag = false;
     }
-    $(this).show();
-  });
+
+      $('[translate]').each(function() {
+        const value = $(this).attr(lang == 'ru' ? 'translate_ru':'translate');
+        $(this).html(value);
+      $(this).show();
+    });
+  }
+}
+
+translateBlocks.flag = true;
+
+function setlang(l){
+  window.lang = l;
+  translateBlocks();
+  localStorage['savelang'] = l;
 }
