@@ -18,13 +18,15 @@ function sdk(callback){
       });
     }
   } else if(platform == platforms.vkplay) {
-    var apiurl = '//vkplay.ru/app/'+gameid+'/static/mailru.core.js';
+    var apiurl = 'https://vkplay.ru/app/'+gameid+'/static/mailru.core.js';
     var initFunc = function(){
       iframeApi({appid: gameid, adsCallback: adsCallback,
-        userInfoCallback: function(userinf) {          
+        userInfoCallback: function(userinf) {
           console.log(userinf);
         }
       }).then(function(api){
+        api.userInfo();
+
         const queryString = window.location.search.slice(1);
         if (!queryString) {
             return {};
