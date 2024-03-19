@@ -10,7 +10,7 @@ function sdk(callback){
         window.isMobile = !ysdk.deviceInfo.isDesktop() && ysdk.deviceInfo._type != null;
 				window.isPC = ysdk.deviceInfo.isDesktop() || ysdk.deviceInfo._type == null;
 				window.lang = ysdk.environment.i18n.lang;
-        
+
         ysdk.getLeaderboards().then(lb => {
 					window.lb = lb;
 			  });
@@ -20,7 +20,11 @@ function sdk(callback){
   } else if(platform == platforms.vkplay) {
     var apiurl = '//vkplay.ru/app/'+gameid+'/static/mailru.core.js';
     var initFunc = function(){
-      iframeApi({appid: gameid, adsCallback: adsCallback}).then(function(api){
+      iframeApi({appid: gameid, adsCallback: adsCallback,
+        userInfoCallback: function(userinf) {          
+          console.log(userinf);
+        }
+      }).then(function(api){
         const queryString = window.location.search.slice(1);
         if (!queryString) {
             return {};
