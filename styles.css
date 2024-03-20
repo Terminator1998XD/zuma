@@ -36,18 +36,17 @@ html, body {
 }
 
 #langselector{
-  position: absolute;
-  right: 1vw;
-  top:1vh;
+  display: inline-block;
   color: white;
   font-size: 2vh;
 }
 
-#langselector p{
+#langselector div{
   cursor: pointer;
+  display: block;
 }
 
-#langselector p:hover{
+#langselector div:hover{
   text-decoration: underline;
 }
 
