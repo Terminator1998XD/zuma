@@ -57,10 +57,11 @@
 					<span id="minigame">
 						<p><span translate="Available">Доступно</span>: <span id="balance">0</span>$</p>
 					</span>
-					<p><button onclick="PlayClick()" style="font-size:5vh; display: inline-block;animation: anim229 1s infinite;" translate="Play">Играть</button>
+					<p>
+						<button onclick="PlayClick()" style="font-size:5vh; display: inline-block;animation: anim229 1s infinite;" translate="Play">Играть</button>
 						<div id="langselector" style="display: none;">
-							<p onclick="setlang('ru')">РУ</p>
-							<p onclick="setlang('en')">EN</p>
+							<div onclick="setlang('ru')">РУ</div>
+							<div onclick="setlang('en')">EN</div>
 						</div>
 					</p>
 					<p id="mapselector" style="display:none;"><img style="float:left" src="textures/arr2.png" onclick="leftmap()"><span translate="Map: ">Карта: </span><span id="ms_info" translate="random">случайная</span><img style="float:right" onclick="rightmap()" src="textures/arr3.png"></p>
