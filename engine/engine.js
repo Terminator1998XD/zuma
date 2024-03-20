@@ -20,7 +20,13 @@ function resizeCanvas() {
           if(resizeCanvas.ovl == null){
             const overlay = getOverlay();
             resizeCanvas.ovl = overlay.parent();
-            overlay.append($('<p>').text(lang=='ru' ? "Игра не поддерживает альбомную ориентацию, переверните смартфон, чтобы продолжить игру" : "The game does not support landscape orientation, turn your smartphone over to continue playing"));    
+            overlay.append($('<p>').text(lang=='ru' ? "Игра не поддерживает альбомную ориентацию, переверните смартфон, чтобы продолжить игру" : "The game does not support landscape orientation, turn your smartphone over to continue playing"));
+            if(!OnPause){
+        			OnPause = true;
+        			updlb();
+        			$('.overlay').show(500).css({'background-color': 'rgba(0,0,0,0.7)'});
+        			$('#pausem').show();
+        		}    
           }
           return;
         }
