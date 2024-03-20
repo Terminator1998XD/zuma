@@ -12,9 +12,32 @@ function resizeCanvas() {
   const overlay = $('.overlay');
 
   if(myOrentation == orentations.vertical){
-      canvas.width = isMobile ? window.innerWidth : Math.min(600,window.innerWidth);
+      if(isMobile){
 
-      if(!isMobile){
+        canvas.width = window.innerWidth;
+
+        if(window.innerWidth > window.innerHeight){
+          const overlay = getOverlay();
+          resizeCanvas.ovl = overlay.parent();
+          overlay.append($('<p>').text(lang=='ru' ? "Игра не поддерживает альбомную ориентацию, переверните смартфон, чтобы продолжить игру" : "The game does not support landscape orientation, turn your smartphone over to continue playing"));
+          return;
+        }
+        else if(resizeCanvas.ovl != null){
+          resizeCanvas.ovl.remove();
+          resizeCanvas.ovl = null;
+        }
+
+        canvas.style.marginLeft = 'unset';
+        overlay.css({'left': 0});
+      }
+      else {
+
+        if(platform == platforms.yandex) canvas.width = Math.min(600,window.innerWidth);
+        else{
+          const scale = Math.min(window.innerWidth / gameViewport[0], window.innerHeight / gameViewport[1]);
+          canvas.width = gameViewport[0] * scale;
+        }
+
         const str = `calc(50% - ${canvas.width / 2}px)`;
         canvas.style.marginLeft = str;
         overlay.css({'left': str});
@@ -110,10 +133,15 @@ function Render()
 	g.scale(scaleX, scaleY);
   g.drawImage(backgroundTexture, 0,0,900,1600);
 
-  g.shadowColor = 'black';
-  g.shadowBlur = 5;
-  g.shadowOffsetX = 5;
-  g.shadowOffsetY = 5;
+  if(isMobile){
+    g.shadowColor = 'rgba(0,0,0,0)';
+  }
+  else{
+    g.shadowColor = 'black';
+    g.shadowBlur = 5;
+    g.shadowOffsetX = 5;
+    g.shadowOffsetY = 5;
+  }
 
   CameraFovW = camera.x + canvas.width * (1/scaleX);
   CameraFovH = camera.y + canvas.height * (1/scaleY);

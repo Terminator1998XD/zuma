@@ -3,23 +3,50 @@ var allcolors = null;
 var isMove = false;
 var moveReady = false;
 var kills = 0;
+var games_play_count = 0;
+var mapid = 0;
+var map = null;
 
 function spawnEnable(advend){
+
+  if(window['maps'] == null){
+    window.maps = [
+      new Map(Ring),
+      new Map(custom_part_0,custom_part_1),
+      new Map(custom_part_2),
+      new Map(custom_part_3, custom_part_4)
+    ];
+  }
+
+  games_play_count++;
+
+  if(games_play_count == 2){
+    localStorage['ms'] = true;
+    $('#mapselector').show();
+  }
+
+  if(menumap < 0){
+    map = maps[mapid];
+    mapid++;
+    if(mapid >= maps.length) mapid = 0;
+  } else {
+    map = maps[menumap];
+  }
+
   allcolors = getTexs('f/',9);
   colors = getTexs('f/',4);
   kills = 0;
   scoremul = 1;
   $('#levelup').hide();
-  Ring.ring.ls = spawnBall();
-  Ring.pool.push(Ring.ring.ls);
+
+  map.Init(advend);
   new Bullet();
 
   if(advend){
-    Ring.ring.ls.OnUpdate = false;
     $('#air').show(100);
+    isMove = false;
   }
   else{
-    Ring.ring.OnUpdate = true;
     isMove = true;
   }
 }
@@ -42,15 +69,15 @@ function AddScore(_score){
   }
 }
 
-function spawnBall(){
+function spawnBall(map_part){
   let col = 0;
   do{
     col = getrand(0,colors.length);
   }
-  while(col == spawnBall.last);
-  const b = new Ball(colors[col]);
+  while(col == map_part.lastcol);
+  const b = new Ball(map_part, colors[col]);
   dim.addGameObject(b);
-  spawnBall.last = col;
+  map_part.lastcol = col;
   return b;
 }
 
@@ -58,5 +85,3 @@ function drawBall(data){
   const radius = Ball.radius;
   g.drawImage(data, -radius, -radius, radius * 2, radius * 2);
 }
-
-spawnBall.last = 0;

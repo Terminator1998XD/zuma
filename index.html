@@ -33,10 +33,14 @@
 <script src="game/content/level.js"></script>
 <script src="game/content/bullet.js"></script>
 <script src="game/content/ball.js"></script>
-<script src="game/content/ring.js"></script>
 <script src="game/content/explode.js"></script>
 <script src="game/content/menu.js"></script>
 <script src="game/content/minigame.js"></script>
+
+<script src="game/maps/mappart.js"></script>
+<script src="game/maps/map.js"></script>
+<script src="game/maps/ring.js"></script>
+<script src="game/maps/custom.js"></script>
 
 <div id="scoreblock" style="display:none"><span id="score">0</span></div>
 <div id="levelup" translate="Difficulty Increased">Сложность увеличена</div>
@@ -54,6 +58,7 @@
 						<p><span translate="Available">Доступно</span>: <span id="balance">0</span>$</p>
 					</span>
 					<p><button onclick="PlayClick()" style="font-size:5vh; animation: anim229 1s infinite;" translate="Play">Играть</button></p>
+					<p id="mapselector" style="display:none;"><img style="float:left" src="textures/arr2.png" onclick="leftmap()"><span translate="Map: ">Карта: </span><span id="ms_info" translate="random">случайная</span><img style="float:right" onclick="rightmap()" src="textures/arr3.png"></p>
 					<p><button translate="Recommended games" onclick="moregames('#deadscr')">Рекомендованные игры</button></p>
 					<span class="settings"></span>
       </div>

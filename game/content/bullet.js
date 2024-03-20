@@ -3,9 +3,7 @@ class Bullet extends GameObject{
     super(new Vector3(900/2-32,1600/2-32,2), new Size(64,64));
     dim.addGameObject(this);
     this.OnUpdate = true;
-    const len = Ring.pool.length;
-    this.color = Ring.pool[getrand(0, len)].color;
-
+    this.color = map.GetBulletColor();
     this.dir = false;
     this.Update();
   }
@@ -37,7 +35,7 @@ class Bullet extends GameObject{
         dim.map.splice(dim.map.indexOf(this),1);
       }
       else{
-        Ring.CheckBulletContact(this);
+        map.CheckBulletContact(this);
       }
     } else {
       this.Rotate = Math.atan2(my - pos.y, mx - pos.x);
@@ -46,11 +44,8 @@ class Bullet extends GameObject{
         AnyMouseDown = false;
         AnyTouchUp = false;
 
-        if(!Ring.ring.OnUpdate){
-           $('#air').hide();
-           Ring.ring.ls.OnUpdate = true;
-           Ring.ring.OnUpdate = true;
-           isMove = true;
+        if(!map.mapready){
+           map.MakeReady();
            return;
         }
 

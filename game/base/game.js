@@ -10,7 +10,6 @@ function Init(){
 	window.exp = getTexs('exp/e',22);
 	camera.y = 1600;
 
-	dim.addGameObject(new Ring());
 	loadBackgroundTrackPosition();
 
 	let rec = localStorage['myrecord'];
@@ -23,9 +22,10 @@ function Init(){
 	}
 
 	window.isPC = false;
-	EngineRun();
 	$('.overlay').show();
 	hideTexts();
+
+	EngineRun();
 
 	sdk(ysdk => {
         console.log('SDK initialized');
@@ -64,11 +64,7 @@ function Lose(){
 	dead_advprompt(TXT('losetext'),preAlive,postAlive);
 
 	function preAlive(){
-		const pool = Ring.pool;
-		for(let i = 0; i < 10; i++){
-			pool[i].Explode();
-		}
-		pool.splice(0,10);
+		map.AlivePlayer();
 	}
 
 	function postAlive(){
@@ -95,11 +91,11 @@ function PlayClick(){
 }
 
 function NewGame(){
-	Ring.pool = [];
-	dim.map = [new Ring()];
+	dim.map = [];
 	score = 0;
 	scoreui.text(0);
 	_loseflag = false;
+	_advprompt = [];
 }
 
 PlayClick.flag = false;

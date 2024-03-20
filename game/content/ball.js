@@ -1,10 +1,10 @@
 class Ball extends GameObject{
 
-  static speed = 0.01;
   static radius = 32;
 
-  constructor(color, angle = 0){
-    super(Ring.getVec(angle), new Size(64,64));
+  constructor(map_part, color, angle = 0){
+    super(map_part.getVec(angle), new Size(64,64));
+    this.map_part = map_part;
     this.a = angle;
     this.color = color;
     this.OnUpdate = true;
@@ -26,21 +26,22 @@ class Ball extends GameObject{
   }
 
   Update(){
-    if(isMove) this.a+=Ball.speed;
+    const ballspeed = this.map_part.ballspeed;
+    if(isMove) this.a+=ballspeed;
     else{
-      const pool = Ring.pool;
+      const pool = this.map_part.pool;
       const index = pool.indexOf(this);
       let next = pool[index+1];
       next = next == null ? 0 : next.a;
-      if(this.a - next > 0.2){
-        this.a-=Ball.speed;
+      if(this.a - next > this.map_part.balloffset){
+        this.a-=ballspeed;
         moveReady = false;
         this.isReady = false;
       }
       else this.isReady = true;
     }
 
-    this.pos = Ring.getVec(this.a);
+    this.pos = this.map_part.getVec(this.a);
 
     if(this.a > 6.19){
       Lose();
