@@ -48,6 +48,12 @@ function sdk(callback){
         window.lb = null;
 
         callback({adv:{
+          hideBannerAdv: function(){
+            console.log("Попытка скрыть стики баннер. Sticky-баннер не обнаружен.");
+          },
+          showBannerAdv: function(){
+            console.log("Попытка показать стики баннер. VKPlay Mini не поддерживает Sticky-баннер");
+          },
           showFullscreenAdv: function(info){
             let cb = info.callbacks;
             adsCallback.onClose = cb.onClose;
