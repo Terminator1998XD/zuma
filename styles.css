@@ -349,6 +349,9 @@ button:hover{
   height: 16vh;
   margin-top: 1vh;
   cursor: pointer;
+  display: inline-block;
+  margin-left: 0.25vw;
+  margin-right: 0.25vw;
 }
 
 .game img{
@@ -367,14 +370,6 @@ button:hover{
     margin: 1px !important;
     padding: 0 !important;
   }
-}
-
-@media (max-height: 500px){
-	.game{
-	  display: inline-block;
-	  margin-left: 0.25vw;
-	  margin-right: 0.25vw;
-	}
 }
 
 @media (max-width: 1000px){
