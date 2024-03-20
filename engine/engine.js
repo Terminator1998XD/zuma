@@ -17,9 +17,11 @@ function resizeCanvas() {
         canvas.width = window.innerWidth;
 
         if(window.innerWidth > window.innerHeight){
-          const overlay = getOverlay();
-          resizeCanvas.ovl = overlay.parent();
-          overlay.append($('<p>').text(lang=='ru' ? "Игра не поддерживает альбомную ориентацию, переверните смартфон, чтобы продолжить игру" : "The game does not support landscape orientation, turn your smartphone over to continue playing"));
+          if(resizeCanvas.ovl == null){
+            const overlay = getOverlay();
+            resizeCanvas.ovl = overlay.parent();
+            overlay.append($('<p>').text(lang=='ru' ? "Игра не поддерживает альбомную ориентацию, переверните смартфон, чтобы продолжить игру" : "The game does not support landscape orientation, turn your smartphone over to continue playing"));    
+          }
           return;
         }
         else if(resizeCanvas.ovl != null){
